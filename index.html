@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quiz</title>
+    <style type="text/css">
+    .correctCls {
+        color: rgb(0, 128, 0);
+    }
+
+    .falseCls {
+        color: red;
+    }
+
+    button {
+        color: white;
+        background: #4caf50;
+        width: 120px;
+        height: 35px;
+    }
+
+    .scoreTitle {
+        color: #ff5722;
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .score {
+        font-weight: bold;
+        font-size: 20px;
+        color: black;
+        padding:20px;
+    }
+    </style>
+</head>
+
+<body style="background: #c9dd15;">
+    <div style=" padding: 5px; border: black solid 2px;">
+    	<h1>Test your Knowledge</h1>
+        <div>
+            <p>
+                <button onclick="propmtQuestion(1,this)">Question 1 </button>
+                <span id="q1Correct" class="correctCls"></span>
+                <span id="q1False" class="falseCls"></span>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button onclick="propmtQuestion(2,this)">Question 2 </button>
+                <span id="q2Correct" class="correctCls"></span>
+                <span id="q2False" class="falseCls"></span>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button onclick="propmtQuestion(3,this)">Question 3 </button>
+                <span id="q3Correct" class="correctCls"></span>
+                <span id="q3False" class="falseCls"></span>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button onclick="propmtQuestion(4,this)">Question 4 </button>
+                <span id="q4Correct" class="correctCls"></span>
+                <span id="q4False" class="falseCls"></span>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button onclick="propmtQuestion(5,this)">Question 5 </button>
+                <span id="q5Correct" class="correctCls"></span>
+                <span id="q5False" class="falseCls"></span>
+            </p>
+        </div>
+    </div>
+    <div>
+        <p><span class="scoreTitle">Your Total Score is</span><span id="score" class="score">0</span></p>
+    </div>
+</body>
+<script type="text/javascript">
+var totalScore = 0;
+var isValid=true;
+function propmtQuestion(q,e) {
+    if (q == 1) {
+        var cpName = prompt("Name the Capital of Canada? ").toLowerCase();
+        var ans = "ottawa";
+        if (cpName == ans) {
+        	disableQuestion(e);
+        	correctFun('q1Correct');
+        } else {
+        	disableQuestion(e);
+            document.getElementById('q1False').innerHTML = "Incorrect";
+        }
+
+    } else if (q == 2) {
+        var isTrue = confirm("Can you order Coffee from Tim Hortin?")
+        if (isTrue == true) {
+        	disableQuestion(e);
+        	correctFun('q2Correct');
+        } else {
+        	disableQuestion(e);
+            document.getElementById('q2False').innerHTML = "Incorrect";
+        }
+    } else if (q == 3) {
+        var pmNmae = prompt("What is the Name of Prime Minister of Canada ? ");
+        pmNmae=pmNmae.toLowerCase();
+        var ans = "justin trudeau"
+        if (ans.indexOf(pmNmae) > -1) {
+        	disableQuestion(e);
+        	correctFun('q3Correct');
+        } else {
+        	disableQuestion(e);
+            document.getElementById('q3False').innerHTML = "Incorrect";
+        }
+    } else if (q == 4) {
+    	var que="What is the minimum age for Driving?"
+    	if(isValid==false){
+    		que="You must enter number. What is the minimum age for Driving?"
+    	}
+        var age = prompt(que);
+        var ans = 18;
+        if (isNaN(age)==false && age!='') {
+        	isValid=true;
+            if (ans == age) {
+            	disableQuestion(e);
+            	correctFun('q4Correct')
+            } else {
+            	disableQuestion(e);
+                document.getElementById('q4False').innerHTML = "Incorrect";
+            }
+        }else{
+        	isValid=false
+        	propmtQuestion(4,e);
+        }
+    } else if (q == 5) {
+        var isTrue = confirm("Is eiffel tower in france ")
+        var ans = "ottawa";
+        if (isTrue == true) {
+        	disableQuestion(e)
+            correctFun('q5Correct');
+        } else {
+        	disableQuestion(e);
+            document.getElementById('q5False').innerHTML = "Incorrect";
+        }
+    }
+}
+
+function correctFun(id){
+	totalScore++;
+    document.getElementById(id).innerHTML = "Correct";
+    document.getElementById('score').innerHTML = totalScore;
+}
+
+function disableQuestion(e){
+	e.disabled=true;
+	e.style.background='gray'
+	e.style.cursor='not-allowed'
+}
+
+</script>
+
+</html>
